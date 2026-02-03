@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+    <center><h1>TP3 Développement Web - Erenay Hamurcu</h1></center>
+    <hr>
+
+    <h2>EXERCICE 1 : Glossaire des balises HTML</h2>
+
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th>Balise</th>
+                <th>Explication</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>&lt;!DOCTYPE html&gt;</code></td>
+                <td>Déclaration obligatoire au début indiquant qu'il s'agit d'un document HTML5.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;html&gt;</code></td>
+                <td>Élément racine de la page. Contient tout le code.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;head&gt;</code></td>
+                <td>En-tête contenant les informations invisibles (métadonnées, liens fichiers).</td>
+            </tr>
+            <tr>
+                <td><code>&lt;meta&gt;</code></td>
+                <td>Fournit des métadonnées comme l'encodage (UTF-8) ou le viewport.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;title&gt;</code></td>
+                <td>Définit le titre de l'onglet du navigateur.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;link&gt;</code></td>
+                <td>Lie des ressources externes (feuilles de style CSS, favicon).</td>
+            </tr>
+            <tr>
+                <td><code>&lt;body&gt;</code></td>
+                <td>Corps de la page contenant tous les éléments visibles.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;header&gt;</code></td>
+                <td>En-tête d'une section ou de la page (souvent pour le logo/menu).</td>
+            </tr>
+            <tr>
+                <td><code>&lt;div&gt;</code></td>
+                <td>Conteneur générique de type bloc pour diviser la page.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;article&gt;</code></td>
+                <td>Contenu indépendant et autonome (ex: un article de blog).</td>
+            </tr>
+            <tr>
+                <td><code>&lt;h1&gt;</code></td>
+                <td>Titre principal (le plus important).</td>
+            </tr>
+            <tr>
+                <td><code>&lt;h3&gt;, &lt;h4&gt;</code></td>
+                <td>Sous-titres de niveaux inférieurs.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;p&gt;</code></td>
+                <td>Paragraphe de texte.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;ul&gt;</code></td>
+                <td>Liste à puces (non ordonnée).</td>
+            </tr>
+            <tr>
+                <td><code>&lt;footer&gt;</code></td>
+                <td>Pied de page (mentions légales, fin de page).</td>
+            </tr>
+            <tr>
+                <td><code>&lt;script&gt;</code></td>
+                <td>Intègre du code JavaScript pour l'interactivité.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;!-- --&gt;</code></td>
+                <td>Commentaire (non affiché à l'écran).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+    <hr> <br><br>
+
+    <h2>EXERCICE 2 : Reproduction du texte SQL</h2>
+
+    <h1>1. Le langage SQL</h1>
+
+    <h2>1.1. Définition</h2>
+    <p>
+        Le langage <strong>SQL</strong> (<strong>Structured Query Language</strong> ou Langage de requêtes structuré) est un langage comprenant à lui seul l'ensemble des ordres nécessaires à la création et à la gestion d'une base de données relationnelle. Il a été créé en 1986 et est en fait l'aboutissement de plusieurs langages (Sequel en 1977, System/R, ...) créés depuis l'apparition du modèle relationnel en 1970 (le modèle relationnel a été inventé par Mr Codd, un mathématicien de chez IBM). L'utilisation du langage SQL suppose obligatoirement que les données aient été définies selon le modèle relationnel au sein d'un SGBDR (Oracle ©, SQLServer, mySQL, PostgreSQL...).
+    </p>
+
+    <h2>1.2. Les différentes normes utilisées</h2>
+    <p>
+        Il existe aujourd'hui plusieurs normes relatives à l'utilisation du <u>langage SQL</u>. La différence entre ces deux normes se situe principalement dans l'écriture des jointures et dans l'ajout de fonctionnalités. :
+    </p>
+
+    <ul>
+        <li>La norme <strong>SQL 89</strong> qui est encore très utilisée actuellement.</li>
+        <li>La norme <strong>SQL 92</strong>.</li>
+        <li>Aujourd'hui <strong>SQL 2011</strong>.</li>
+    </ul>
+
+    <p>
+        Bien qu'il existe des normes il peut y avoir des différences entre SGBDR dans la syntaxe. Ainsi on peut lire sur le site de <strong><u>PostgreSQL</u></strong>:
+    </p>
+
+    <ul>
+        <li>"Le développement de <em>PostgreSQL™</em> respecte le standard en vigueur, tant que celui-ci ne s'oppose pas aux fonctionnalités traditionnelles ou au bon sens..."</li>
+        <li>"SQL-92 définit trois niveaux de conformité : basique (<em>ENTRY</em>), intermédiaire (<em>INTERMEDIATE</em>) et complète (<em>FULL</em>). La majorité des systèmes de gestion de bases de données se prétendaient compatibles au standard SQL dès lors qu'ils se conformaient au niveau Entry"</li>
+    </ul>
+
+    <h1>2. Le modèle de données utilisé dans le cours</h1>
+
+    <h2>2.1. Le modèle entité-association (ou MCD) d'un établissement hospitalier</h2>
+    
+    <h2>2.2. Le modèle relationnel (ou MRD) d'un établissement hospitalier</h2>
+
+    <h2>2.3. La description textuelle des tables utilisées</h2>
+
+    <p>
+        <mark><strong>fonction_personnel</strong></mark> (<u>code_fonction</u>, libelle_fonction)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Clé primaire : <em>code_fonction</em>
+    </p>
+
+    <p>
+        <mark><strong>service</strong></mark> (<u>num_service</u>, libelle_service, capacite_accueil, date_ouverture)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Clé primaire : <em>num_service</em>
+    </p>
+
+    <br><br>
+    <hr> <br><br>
+
+    <h2>EXERCICE 3 : Mon CV</h2>
+
+    <header>
+        <h1>Erenay Hamurcu</h1>
+        <p>Étudiant en BTS Services Informatiques aux Organisations (SIO)</p>
+    </header>
+
+    <section>
+        <h3>Contacts</h3>
+        <address>
+            Téléphone : 06 98 16 54 82<br>
+            Email : <a href="mailto:erenay29112007@gmail.com">erenay29112007@gmail.com</a>
+        </address>
+    </section>
+
+    <section>
+        <h3>Éducation</h3>
+        <ul>
+            <li>
+                <strong>Baccalauréat en sciences et technologies de l'industrie et du développement durable (STI2D)</strong><br>
+                2025 – Lycée Henry Laurens.
+            </li>
+            <li>
+                <strong>Brevet des collèges</strong><br>
+                2022 – Collège Fernand Berthon.
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Compétences</h3>
+        <ul>
+            <li>Maitrise Cisco Packet Tracer</li>
+            <li>Maitrise du chiffrement de données et de son fonctionnement</li>
+            <li>Maîtrise des requêtes de sélection sur des bases de données</li>
+            <li>Notions en programmation Python et Java</li>
+            <li>Connaissance des protocoles DNS, DHCP, TCP/IP</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Expériences</h3>
+        <ul>
+            <li>Stage dans une boulangerie</li>
+            <li>Travail de manufacture dans une corporation</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Loisirs</h3>
+        <ul>
+            <li>Football</li>
+            <li>Jeux vidéos</li>
+        </ul>
+
+        <h3>Langues</h3>
+        <ul>
+            <li><strong>Français :</strong> courant</li>
+            <li><strong>Anglais :</strong> A1</li>
+            <li><strong>Espagnol :</strong> A2</li>
+        </ul>
+
+        <h3>Qualités</h3>
+        <ul>
+            <li>Sérieux</li>
+            <li>Ambitieux</li>
+            <li>Investi</li>
+        </ul>
+    </section>
+
+
+</body>
+</html>
