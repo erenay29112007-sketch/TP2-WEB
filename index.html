@@ -1,13 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mon Sommaire TP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #2c3e50;
+        }
+
+        h1 {
+            margin-top: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 900px;
+            margin-top: 40px;
+        }
+
+        /* Toutes les cartes ont maintenant le même style */
+        .tp-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #2c3e50;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            border-color: #3498db;
+            color: #3498db;
+        }
+    </style>
 </head>
 <body>
-     <h1> TP : </h1>
-     <a href="tp3/index.html">lien vers tp3</a>
-     <a href="tp4/index.html">lien vers tp4</a>
+
+    <h1>Mes Travaux Pratiques</h1>
+
+    <div class="container">
+        <a href="tp3/index.html" class="tp-card">📘 TP 3</a>
+        <a href="tp4/index.html" class="tp-card">📗 TP 4</a>
+        <a href="tp5/index.html" class="tp-card">📙 TP 5</a>
+        <a href="tp6/index.html" class="tp-card">📕 TP 6</a>
+    </div>
+
 </body>
 </html>
