@@ -5,32 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Sommaire TP</title>
     <style>
+        /* Styles de base */
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7f6;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #2c3e50;
+            color: #333;
         }
 
         h1 {
             margin-top: 50px;
+            color: #2c3e50;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
+        /* Conteneur des liens */
         .container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             width: 80%;
-            max-width: 900px;
+            max-width: 800px;
             margin-top: 40px;
         }
 
-        /* Toutes les cartes ont maintenant le même style */
+        /* Style des "Cartes" de TP */
         .tp-card {
             background: white;
             padding: 30px;
@@ -39,17 +42,30 @@
             color: #2c3e50;
             text-align: center;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
 
+        /* Effet au survol */
         .tp-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.15);
             border-color: #3498db;
             color: #3498db;
+        }
+
+        /* Style pour les futurs TP (encore vides) */
+        .tp-card.pending {
+            background: #eee;
+            color: #999;
+            cursor: not-allowed;
+            border: 2px dashed #ccc;
+            box-shadow: none;
+        }
+        .tp-card.pending:hover {
+            transform: none;
         }
     </style>
 </head>
@@ -60,8 +76,9 @@
     <div class="container">
         <a href="tp3/index.html" class="tp-card">📘 TP 3</a>
         <a href="tp4/index.html" class="tp-card">📗 TP 4</a>
-        <a href="tp5/index.html" class="tp-card">📙 TP 5</a>
-        <a href="tp6/index.html" class="tp-card">📕 TP 6</a>
+        
+        <a href="#" class="tp-card pending">📂 TP 5 </a>
+        <a href="#" class="tp-card pending">📂 TP 6 </a>
     </div>
 
 </body>

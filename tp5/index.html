@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP</title>
+    <style>
+        /* Styles généraux pour la page */
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            color: #333;
+        }
+        h1 { 
+            text-align: center; 
+            font-size: 2em; 
+            margin-bottom: 40px;
+        }
+        h2 { 
+            margin-top: 50px; 
+            margin-bottom: 15px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+
+        /* ----- Styles de l'Exercice 1 ----- */
+        .table-ex1 { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 14px;
+        }
+        .table-ex1 th, .table-ex1 td { 
+            border: 1px solid #ffffff; 
+            padding: 8px; 
+            text-align: center; 
+        }
+        .header-dark { background-color: #34495e; color: white; font-weight: bold; }
+        .header-grey { background-color: #7f8c8d; color: white; font-weight: bold; }
+        .zone-a { background-color: #f39c12; color: white; } /* Orange */
+        .zone-b { background-color: #2980b9; color: white; } /* Bleu */
+        .zone-c { background-color: #27ae60; color: white; } /* Vert */
+        .cell-grey { background-color: #bdc3c7; }
+        .cell-white { background-color: #ecf0f1; }
+        .text-small { font-size: 12px; }
+
+        /* ----- Styles de l'Exercice 2 ----- */
+        .table-ex2 { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 13px;
+        }
+        .table-ex2 th, .table-ex2 td { 
+            border: 1px solid #000; 
+            padding: 10px; 
+            text-align: center; 
+        }
+        .table-ex2 th { background-color: #e0e0e0; font-weight: bold; }
+        .caption-title { 
+            text-align: center; 
+            font-size: 14px; 
+            margin-bottom: 10px; 
+            font-weight: bold;
+        }
+        .code { font-family: monospace; background-color: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+        .link { color: #2980b9; text-decoration: underline; }
+
+        /* ----- Styles de l'Exercice 3 ----- */
+        .table-ex3 { 
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        .table-ex3 th, .table-ex3 td { 
+            border: 1px solid #000; 
+            text-align: center; 
+            padding: 8px; 
+            height: 30px;
+        }
+        .title-month { background-color: #ffffff; font-weight: bold; font-size: 16px; }
+        .days-header { background-color: #9b59b6; color: white; font-weight: bold; } /* Violet */
+        .day-cell { background-color: #d4e6f1; } /* Bleu très clair (semaine) */
+        .weekend-cell { background-color: #85c1e9; font-weight: bold; } /* Bleu plus foncé (weekend) */
+        .empty-cell { background-color: #eaeded; } /* Gris clair pour les cases vides */
+    </style>
+</head>
+<body>
+
+    <h1>TP</h1>
+
+    <h2>Exercice 1</h2>
+    <table class="table-ex1">
+        <tr>
+            <th class="header-dark">Vacances</th>
+            <th class="zone-a">Zone A</th>
+            <th class="zone-b">Zone B</th>
+            <th class="zone-c">Zone C</th>
+        </tr>
+        <tr>
+            <td class="cell-grey"></td>
+            <td class="zone-a text-small">Académies de Besançon, Bordeaux, Clermont-Ferrand, Dijon, Grenoble, Limoges, Lyon et Poitiers.</td>
+            <td class="zone-b text-small">Académies d'Aix-Marseille, Amiens, Lille, Nancy-Metz, Nantes, Nice, Normandie, Orléans-Tours, Reims, Rennes et Strasbourg.</td>
+            <td class="zone-c text-small">Académies de Créteil, Montpellier, Paris, Toulouse et Versailles.</td>
+        </tr>
+        <tr>
+            <td class="header-grey">Prérentrée des enseignants</td>
+            <td colspan="3" class="cell-white">Reprise des cours : vendredi 1er septembre 2017</td>
+        </tr>
+        <tr>
+            <td class="header-grey">Rentrée scolaire des élèves</td>
+            <td colspan="3" class="cell-white">Reprise des cours : lundi 4 septembre 2017</td>
+        </tr>
+        <tr>
+            <td class="header-grey">Vacances de la Toussaint</td>
+            <td colspan="3" class="cell-white">Fin des cours : samedi 21 octobre 2017<br>Reprise des cours : lundi 6 novembre 2017</td>
+        </tr>
+        <tr>
+            <td class="header-grey">Vacances de Noël</td>
+            <td colspan="3" class="cell-white">Fin des cours : samedi 23 décembre 2017<br>Reprise des cours : lundi 8 janvier 2018</td>
+        </tr>
+        <tr>
+            <td class="header-grey">Vacances d'hiver</td>
+            <td class="zone-a">Fin des cours : samedi 10 février 2018<br>Reprise des cours : lundi 26 février 2018</td>
+            <td class="zone-b">Fin des cours : samedi 24 février 2018<br>Reprise des cours : lundi 12 mars 2018</td>
+            <td class="zone-c">Fin des cours : samedi 17 février 2018<br>Reprise des cours : lundi 5 mars 2018</td>
+        </tr>
+        <tr>
+            <td class="header-grey">Vacances de printemps</td>
+            <td class="zone-a">Fin des cours : samedi 7 avril 2018<br>Reprise des cours : lundi 23 avril 2018</td>
+            <td class="zone-b">Fin des cours : samedi 21 avril 2018<br>Reprise des cours : lundi 7 mai 2018</td>
+            <td class="zone-c">Fin des cours : samedi 14 avril 2018<br>Reprise des cours : lundi 30 avril 2018</td>
+        </tr>
+        <tr>
+            <td class="header-grey">Vacances d'été</td>
+            <td colspan="3" class="cell-white">Fin des cours : samedi 7 juillet</td>
+        </tr>
+    </table>
+
+    <h2>Exercice 2</h2>
+    <div class="caption-title">Liste des langages de programmation serveur les plus populaires</div>
+    <table class="table-ex2">
+        <tr>
+            <th>Logo</th>
+            <th>Nom abrégé</th>
+            <th>Nom complet</th>
+            <th>Année de sortie</th>
+            <th>Site web de référence</th>
+            <th>Exemple de code</th>
+        </tr>
+        <tr>
+            <td>[Logo PHP]</td>
+            <td>PHP</td>
+            <td>Hypertext Preprocessor</td>
+            <td>1995</td>
+            <td><a href="#" class="link">PHP.net</a></td>
+            <td class="code">&lt;?php echo "Hello World";?&gt;</td>
+        </tr>
+        <tr>
+            <td>[Logo Jakarta]</td>
+            <td>JSP</td>
+            <td>Jakarta Server Pages</td>
+            <td>1999</td>
+            <td><a href="#" class="link">jakarta.ee</a></td>
+            <td class="code">&lt;%out.println("Hello World");%&gt;</td>
+        </tr>
+        <tr>
+            <td>[Logo ASP]</td>
+            <td>ASP</td>
+            <td>Active Server Pages</td>
+            <td>2000</td>
+            <td><a href="#" class="link">asp.net</a></td>
+            <td class="code">&lt;%Response.Write("Hello World")%&gt;</td>
+        </tr>
+        <tr>
+            <td>[Logo Ruby]</td>
+            <td>Ruby</td>
+            <td>Ruby</td>
+            <td>1995</td>
+            <td><a href="#" class="link">ruby-lang.org</a></td>
+            <td class="code">puts "Hello World"</td>
+        </tr>
+        <tr>
+            <td>[Logo Perl]</td>
+            <td>Perl</td>
+            <td>Perl</td>
+            <td>1987</td>
+            <td><a href="#" class="link">perl.org</a></td>
+            <td class="code">print "Hello World";</td>
+        </tr>
+        <tr>
+            <td>[Logo Python]</td>
+            <td>Python</td>
+            <td>Hypertext Preprocessor</td>
+            <td>1991</td>
+            <td><a href="#" class="link">python.org/</a></td>
+            <td class="code">print("Hello World")</td>
+        </tr>
+    </table>
+
+    <h2>Exercice 3</h2>
+    <table class="table-ex3">
+        <tr>
+            <th colspan="7" class="title-month">Avril 2026</th>
+        </tr>
+        <tr>
+            <th class="days-header">Lundi</th>
+            <th class="days-header">Mardi</th>
+            <th class="days-header">Mercredi</th>
+            <th class="days-header">Jeudi</th>
+            <th class="days-header">Vendredi</th>
+            <th class="days-header">Samedi</th>
+            <th class="days-header">Dimanche</th>
+        </tr>
+        <tr>
+            <td class="empty-cell"></td>
+            <td class="empty-cell"></td>
+            <td class="empty-cell"></td>
+            <td class="day-cell">1</td>
+            <td class="day-cell">2</td>
+            <td class="weekend-cell">3</td>
+            <td class="weekend-cell">4</td>
+        </tr>
+        <tr>
+            <td class="day-cell">5</td>
+            <td class="day-cell">6</td>
+            <td class="day-cell">7</td>
+            <td class="day-cell">8</td>
+            <td class="day-cell">9</td>
+            <td class="weekend-cell">10</td>
+            <td class="weekend-cell">11</td>
+        </tr>
+        <tr>
+            <td class="day-cell">12</td>
+            <td class="day-cell">13</td>
+            <td class="day-cell">14</td>
+            <td class="day-cell">15</td>
+            <td class="day-cell">16</td>
+            <td class="weekend-cell">17</td>
+            <td class="weekend-cell">18</td>
+        </tr>
+        <tr>
+            <td class="day-cell">19</td>
+            <td class="day-cell">20</td>
+            <td class="day-cell">21</td>
+            <td class="day-cell">22</td>
+            <td class="day-cell">23</td>
+            <td class="weekend-cell">24</td>
+            <td class="weekend-cell">25</td>
+        </tr>
+        <tr>
+            <td class="day-cell">26</td>
+            <td class="day-cell">27</td>
+            <td class="day-cell">28</td>
+            <td class="day-cell">29</td>
+            <td class="day-cell">30</td>
+            <td class="empty-cell"></td>
+            <td class="empty-cell"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

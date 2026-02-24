@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloc 1 - Programmation Web</title>
+    <style>
+        /* --- Thème Dark Mode --- */
+        :root {
+            --bg-body: #0f172a;       /* Bleu nuit très profond */
+            --bg-card: #1e293b;       /* Bleu gris pour les conteneurs */
+            --text-main: #cbd5e1;     /* Gris clair pour le texte */
+            --text-heading: #f8fafc;  /* Blanc pour les titres */
+            --primary: #38bdf8;       /* Cyan vif */
+            --secondary: #818cf8;     /* Indigo/Violet */
+            --border-color: #334155;  /* Gris sombre pour les bordures */
+            --code-bg: #0b0f19;       /* Fond noir pour le code */
+        }
+
+        html {
+            scroll-behavior: smooth; /* Permet un défilement fluide lors du clic sur le sommaire interne */
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- En-tête --- */
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-heading);
+            text-align: center;
+            padding: 2.5rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        header h1 { margin: 0 0 0.5rem 0; font-size: 2.5rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px;}
+        header p { margin: 0; font-size: 1.1rem; font-weight: 300; color: #94a3b8; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* --- Vues (Gestion de l'affichage) --- */
+        #home-view { display: block; animation: fadeIn 0.5s; }
+        #js-syllabus-view { display: none; animation: fadeIn 0.5s; }
+        #js-intro-view { display: none; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Page d'accueil : Cartes --- */
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: -3.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            padding: 1.5rem;
+            text-align: center;
+            width: 140px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2);
+            border-color: var(--primary);
+        }
+        .card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            object-fit: contain;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.4));
+        }
+        .card h3 { color: var(--text-heading); margin: 0; font-size: 1.2rem; }
+
+        /* Description & Sections Générales */
+        .content-section {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-top: 4px solid var(--secondary);
+            margin-bottom: 2rem;
+        }
+        .content-section h2 { color: var(--primary); margin-top: 0; margin-bottom: 1.5rem; }
+
+        /* Boutons de retour */
+        .back-btn {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .back-btn:hover { background-color: var(--primary); color: #0f172a; }
+
+        /* --- Listes Sommaires Principaux --- */
+        .sommaire-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .sommaire-list li {
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .sommaire-list li:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateX(5px);
+        }
+        .sommaire-list a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .sommaire-list a:hover { color: var(--primary); }
+        .sommaire-list .number {
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 25px;
+        }
+
+        /* --- Sommaire interne au cours --- */
+        .course-toc {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--primary);
+        }
+        .course-toc h3 {
+            margin-top: 0;
+            color: var(--primary);
+            border: none;
+            padding-left: 0;
+            margin-bottom: 1rem;
+        }
+        .course-toc ul {
+            list-style-type: none;
+            padding-left: 0.5rem;
+            margin: 0;
+        }
+        .course-toc ul li { margin-bottom: 0.5rem; }
+        .course-toc ul ul {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .course-toc a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-block;
+        }
+        .course-toc a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+            transform: translateX(3px);
+        }
+
+        /* --- Contenu du cours détaillé --- */
+        .course-body h1 { color: var(--primary); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; font-size: 2rem;}
+        .course-body h2 { color: var(--secondary); margin-top: 2.5rem; scroll-margin-top: 20px; }
+        .course-body h3 { color: var(--text-heading); margin-top: 2rem; border-left: 3px solid var(--primary); padding-left: 10px; scroll-margin-top: 20px;}
+        .course-body p { margin-bottom: 1.2rem; }
+        .course-body pre {
+            background: var(--code-bg);
+            color: #10b981; /* Vert code */
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+        }
+        .course-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .course-body th, .course-body td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        .course-body th { background-color: rgba(255,255,255,0.05); color: var(--primary); }
+        .diagram-caption { text-align: center; font-style: italic; color: #94a3b8; margin-top: -10px; margin-bottom: 20px; font-size: 0.9rem;}
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Programmation Web</h1>
+        <p>Bloc 1 - HTML, CSS et JavaScript</p>
+    </header>
+
+    <div class="container">
+        
+        <main id="home-view">
+            <div class="cards-container">
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/120px-HTML5_logo_and_wordmark.svg.png" alt="Logo HTML5">
+                    <h3>HTML</h3>
+                </div>
+                <div class="card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/120px-CSS3_logo_and_wordmark.svg.png" alt="Logo CSS3">
+                    <h3>CSS</h3>
+                </div>
+                <div class="card" id="btn-open-js-syllabus">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/120px-Unofficial_JavaScript_logo_2.svg.png" alt="Logo JavaScript">
+                    <h3>JavaScript</h3>
+                </div>
+            </div>
+
+            <div class="content-section" style="text-align: center;">
+                <h2>Description du cours</h2>
+                <p>Ce site regroupe les différents cours et travaux pratiques du module de Programmation Web. Chaque section contient les supports de cours, les exercices et les travaux pratiques associés.</p>
+            </div>
+        </main>
+
+        <main id="js-syllabus-view">
+            <button class="back-btn" id="btn-back-to-home">← Retour à l'accueil</button>
+            
+            <div class="content-section">
+                <h2>Cours de JS</h2>
+                <ul class="sommaire-list">
+                    <li><a href="#" id="btn-open-js-intro"><span class="number">1.</span> Introduction</a></li>
+                    <li><a href="#"><span class="number">2.</span> Les variables</a></li>
+                    <li><a href="#"><span class="number">3.</span> Les bases du JS</a></li>
+                    <li><a href="#"><span class="number">4.</span> Les structures de contrôles - Partie 1</a></li>
+                    <li><a href="#"><span class="number">5.</span> Les structures de contrôles - Partie 2</a></li>
+                    <li><a href="#"><span class="number">6.</span> Les fonctions</a></li>
+                    <li><a href="#"><span class="number">7.</span> Les tableaux</a></li>
+                </ul>
+            </div>
+        </main>
+
+        <main id="js-intro-view">
+            <button class="back-btn" id="btn-back-to-syllabus">← Retour au sommaire JS</button>
+            
+            <div class="content-section course-body">
+                <h1>LANGAGE JAVASCRIPT : LES BASES DU LANGAGE</h1>
+
+                <div class="course-toc">
+                    <h3>Sommaire de ce chapitre</h3>
+                    <ul>
+                        <li><a href="#structure">La structure de base d'un programme</a></li>
+                        <li><a href="#commentaires">Les commentaires</a></li>
+                        <li><a href="#declarations">Les déclarations et instructions</a>
+                            <ul>
+                                <li><a href="#memoire">Mémoire vive</a></li>
+                                <li><a href="#noms">Choix du nom</a></li>
+                                <li><a href="#var-const">Déclaration de variables et constantes</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#types">Les différents types et leur plage de valeur</a></li>
+                        <li><a href="#operateurs">Les opérateurs</a></li>
+                        <li><a href="#fonctions-io">Les fonctions d'entrée/sortie</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="structure">LA STRUCTURE DE BASE D'UN PROGRAMME EN JAVASCRIPT</h2>
+                <p>Lorsque le code JavaScript se trouve dans un fichier séparé (extension .js) La structure générale d'un programme écris en JavaScript est relativement simple.</p>
+<pre><code>/* zone d'en-tête */
+
+/* déclaration des variables globales */
+Declaration1;
+Declaration2;
+
+/* définition des fonctions (mot clef function) */
+    
+/* CORPS DU PROGRAMME */
+Instruction1;
+Instruction2;
+
+/* FIN */</code></pre>
+                <p>Même s'il est possible de déclarer nos variables à n'importe quels moments, il est conseillé de le faire en début de script pour une meilleure lisibilité du code.</p>
+                <p>Lorsque le JavaScript est écris dans une page Web la structure est différente. Dans un premier temps nous allons travailler uniquement sur la partie JavaScript. Cela donne la structure suivante :</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;TODO supply a title&lt;/title&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+
+        &lt;script&gt;
+            //ici les variables globales à la page et les fonctions
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script&gt;
+            //ici les instructions    
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <p>Le langage HTML utilise des balises. Nous reviendrons dessus prochainement. La balise permettant d'ajouter du JavaScript est <code>&lt;script&gt; … &lt;/script&gt;</code>.<br>Cette balise s'ajoute à 2 endroits particulièrement : entre les balises <code>&lt;head&gt;&lt;/head&gt;</code> pour les variables globales et pour les fonctions et entre <code>&lt;body&gt;&lt;/body&gt;</code> pour les instructions.</p>
+
+                <h2 id="commentaires">LES COMMENTAIRES</h2>
+                <p>Les commentaires permettent une relecture de programme pour le programmeur lui-même mais aussi pour ceux qui vont relire le programme (travail en équipe). Un commentaire d’entête est nécessaire pour indiquer le nom du programmeur, la date, le nom du fichier, descriptif du programme. Les commentaires sont du texte simple et ne sont donc pas traités comme étant du code. Ils ne seront donc pas interprétés.</p>
+                <p>2 types de commentaires sont possibles :</p>
+                <ul>
+                    <li><code>//</code> indiquent au compilateur que le reste de la ligne est un commentaire.</li>
+                    <li><code>/* ….  */</code> indiquent au compilateur qu’à partir de <code>/*</code> le texte est un commentaire jusqu’au symbole <code>*/</code> Permet des commentaires sur plusieurs lignes.</li>
+                </ul>
+<pre><code>/* * File:   HelloWorld.js
+ * Author: sgibert
+ *
+ * Created on 14 septembre 2018, 20:19
+ * * Description du programme : explique ici ce que fait ton programme 
+ */</code></pre>
+                <p>Il n'est pas utile d'associer une ligne de code avec un commentaire d'autant plus si ce dernier ne fait que dire ce que fait le code. Exemple :</p>
+<pre><code>// je déclare une variable x=3  : ce commentaire n'a aucun intérêt
+// il vaut mieux expliquer à quoi sert la variable x dans notre code.
+var x=3;</code></pre>
+
+                <h2 id="declarations">LES DECLARATIONS ET INSTRUCTIONS</h2>
+                <p>Une instruction ou une déclaration se termine toujours par un point-virgule (;) C'est le cas de nombreux langages de programmation. Mais attention le langage JavaScript n'est pas aussi strict au niveau de sa syntaxe et certaines instructions autorisent l'absence de ; de fin. Pour faire simple, cela ne coute rien d'ajouter systématiquement ce marqueur de fin d'instruction et sera donc la règle pour nous.</p>
+
+                <h3>LES DECLARATIONS DE VARIABLES</h3>
+                <p>Rappel du cours d'algorithmique : En résumé : <strong>variable = NOM + TYPE + VALEUR</strong></p>
+                <p>JavaScript est dit "faiblement typé" contrairement à d'autres langage dit "fortement typé" comme par exemple le langage C. Avec ses langages il est nécessaire de préciser le type au moment de la déclaration d'une variable.</p>
+                
+                <p>Exemple de déclaration de variable en C :</p>
+<pre><code>int a=3;     //a est un entier et restera un entier pendant tous le programme 
+float b=3.5; //b est un réel et restera un réel pendant tous le programme
+char c='a';  //c est un caractère et restera un caractère pendant tous le programme</code></pre>
+
+                <p>Avec JavaScript une variable est déclarée avec la commande <code>var</code> ou <code>let</code>, mais sans indiquer son type. Le type sera fixé à l'utilisation. La notion de type est bien existante mais jamais indiquée de façon explicite dans le code. Le JavaScript a 8 types : Number, String, Boolean, Null et Undefined, BigInt, Object, et Symbole (nouveau).</p>
+                <p>Cela donne en Javascript :</p>
+<pre><code>var a=3;        // a est un Number
+a="coucou";     // a est maintenant un String</code></pre>
+                <p>Dans ce programme la variable a est déclaré comme étant un "Number". Mais au cours du programme elle devient un "String". Bien que cela soit possible on essaiera au maximum ce genre de mélange.</p>
+
+                
+                <div class="diagram-caption">Schéma de l'interaction entre la Mémoire Vive (RAM) et le Processeur.</div>
+
+                <h3 id="memoire">MEMOIRE VIVE</h3>
+                <p>Sur un PC la mémoire vive est une mémoire de travail. Elle stocke de façon temporaire des données et des programmes. Lorsque le PC est éteint le contenu de cette mémoire est supprimé. On parle alors de mémoire volatile, contrairement au disque dur d'un ordinateur qui stocke lui aussi des données mais de façon permanente. Cette mémoire est très rapide, et communique directement avec le processeur.</p>
+                <p>En JavaScript la mémoire est allouée lors de la création des objets puis libérée « automatiquement » lorsque ceux-ci ne sont plus utilisés. Cette libération automatique est appelée <em>garbage collection</em> en anglais ou ramasse-miettes.</p>
+
+                <h3 id="noms">CHOIX DU NOM</h3>
+                <p>Bien qu'il soit possible de donner des noms de variables avec des caractères accentués en JavaScript on se limitera aux caractères suivants :</p>
+                <ul>
+                    <li><code>a..z</code>, <code>A..Z</code></li>
+                    <li><code>0..9</code> ➔ interdit au début du nom</li>
+                    <li><code>_</code> (underscore) ➔ autorisé au début du nom</li>
+                </ul>
+                <p>On ne peut pas utiliser un tiret <code>-</code> ou un point <code>.</code>, ni utiliser un mot clef du langage comme nom de variable (new, if, typeof,…).</p>
+
+                <h3 id="var-const">DECLARATION DE VARIABLES ET CONSTANTES</h3>
+                <p>On parle de déclaration de variable. 2 mots clefs sont utilisés pour cela : <code>var</code> et <code>let</code>.</p>
+                <ul>
+                    <li>Avec <code>var</code>, la variable est globale (sauf dans une fonction).</li>
+                    <li>Avec <code>let</code>, la variable est locale au bloc d'instruction entre { }.</li>
+                </ul>
+                <p>Que choisir entre var et let ? Pour faire simple nous utiliserons <strong>let</strong>. Enfin il existe un dernier mot clef : <code>const</code>. Comme son nom l'indique il permet de déclarer une constante qui doit être initialisée au moment de sa création.</p>
+<pre><code>&lt;script&gt;
+   let a;           // a est ici undefined
+   let b=4;         // b est un number vaut 4
+   let c, d=3, e;   // 3 variables 
+   
+   const f=3;       // f est une constante
+   var g="Bonjour"; // g est une String
+&lt;/script&gt;</code></pre>
+
+                <h2 id="types">LES DIFFERENTS TYPES ET LEUR PLAGE DE VALEUR</h2>
+                <table>
+                    <tr><th>Type JavaScript</th><th>Taille</th><th>Plage de valeurs</th></tr>
+                    <tr><td>Number</td><td>8 octets</td><td>-(2^53 -1) et 2^53 -1 pour les Entiers<br>5e-324 et 1.79e+308 pour les Réels</td></tr>
+                    <tr><td>BigInt</td><td>?</td><td>Permet d'aller au-delà de la limitation de Number.</td></tr>
+                    <tr><td>String</td><td>2 octets à ?</td><td>Représentation de chaine "Bonjour" ou caractère 'c'</td></tr>
+                    <tr><td>Boolean</td><td>1 octet</td><td>true ou false</td></tr>
+                    <tr><td>Null</td><td>?</td><td>null</td></tr>
+                    <tr><td>undefined</td><td>?</td><td>undefined</td></tr>
+                </table>
+
+                
+                <div class="diagram-caption">Représentation des limites de dépassement d'entier (overflow).</div>
+
+                <h3>DETAILS SUR LES DIFFERENTS TYPES</h3>
+                <p><strong>Number :</strong> représente soit un entier, ou bien un réel. Si Number est un entier sa plage de valeur est comprise entre -(2^53 -1) et 2^53 -1. Passé cette plage JavaScript ne garantit plus la cohérence des calculs.</p>
+<pre><code>let a = 2**53-1;  // ici a vaut 9007199254740991
+a = a + 20;       // en théorie a vaut 9007199254741011
+                  // en réalité cela donne 9007199254741012</code></pre>
+
+                <h2 id="operateurs">LES OPÉRATEURS</h2>
+                <h3>LES OPÉRATEURS ARITHMÉTIQUES</h3>
+                <p><code>+</code> (Addition), <code>-</code> (Soustraction), <code>*</code> (Multiplication), <code>/</code> (Division), <code>%</code> (Modulo), <code>**</code> (Puissance).</p>
+<pre><code>let a=3, b=5, c=a+b;          // c vaut 8 normal
+let a=5, b="test", c=a/b;     // c vaut NaN (Not A Number)</code></pre>
+                
+                <p>Cas particulier de la division d'entier :</p>
+<pre><code>let a=5, b=2, c=a/b;          // sans parseInt c vaut 2.5    
+document.write(parseInt(c));  // avec parseInt c vaut 2
+
+let a=5.5, b=0, c=a/b;        // division par zéro : c vaut Infinity</code></pre>
+
+                <h3>LES OPÉRATEURS LOGIQUES</h3>
+                <p><code>!</code> (Non logique), <code>&&</code> (Et logique), <code>||</code> (Ou logique), <code>==</code> (Égal à), <code>!=</code> (Différent de), <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>.</p>
+
+                <h3 id="fonctions-io">LES FONCTIONS D'ENTRÉE/SORTIE</h3>
+                <ul>
+                    <li><code>window.alert(message);</code></li>
+                    <li><code>resultat = window.confirm(message);</code></li>
+                    <li><code>resultat = window.prompt(message, defaut);</code></li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Sélection des éléments du DOM
+        const homeView = document.getElementById('home-view');
+        const jsSyllabusView = document.getElementById('js-syllabus-view');
+        const jsIntroView = document.getElementById('js-intro-view');
+        
+        // Déclencheurs
+        const btnOpenJsSyllabus = document.getElementById('btn-open-js-syllabus');
+        const btnBackToHome = document.getElementById('btn-back-to-home');
+        const btnOpenJsIntro = document.getElementById('btn-open-js-intro');
+        const btnBackToSyllabus = document.getElementById('btn-back-to-syllabus');
+
+        // Navigation : Accueil -> Sommaire JS
+        btnOpenJsSyllabus.addEventListener('click', () => {
+            homeView.style.display = 'none';
+            jsSyllabusView.style.display = 'block';
+            window.scrollTo(0, 0);
+        });
+
+        // Navigation : Sommaire JS -> Accueil
+        btnBackToHome.addEventListener('click', () => {
+            jsSyllabusView.style.display = 'none';
+            homeView.style.display = 'block';
+        });
+
+        // Navigation : Sommaire JS -> Cours Intro JS
+        btnOpenJsIntro.addEventListener('click', (e) => {
+            e.preventDefault();
+            jsSyllabusView.style.display = 'none';
+            jsIntroView.style.display = 'block';
+            window.scrollTo(0, 0);
+        });
+
+        // Navigation : Cours Intro JS -> Sommaire JS
+        btnBackToSyllabus.addEventListener('click', () => {
+            jsIntroView.style.display = 'none';
+            jsSyllabusView.style.display = 'block';
+            window.scrollTo(0, 0);
+        });
+    </script>
+</body>
+</html>
