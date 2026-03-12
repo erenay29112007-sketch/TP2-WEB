@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoning</title>
+    <style>
+        /* STYLE GÉNÉRAL */
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #eef2f3; overflow: hidden; }
+        .page { display: none; height: 100vh; animation: fadeIn 0.3s; }
+        .page:target { display: block; } 
+        #home { display: block; } 
+        #home:has(~ .page:target) { display: none; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* MENU D'ACCUEIL */
+        .home-menu { text-align: center; padding: 40px 20px; }
+        .grid-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; max-width: 1100px; margin: 0 auto; }
+        .card { background: white; padding: 25px; border-radius: 12px; text-decoration: none; color: #333; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.2s; font-weight: bold; border-bottom: 4px solid #333; }
+        .card:hover { transform: translateY(-3px); background: #333; color: white; }
+        .back-btn { position: fixed; bottom: 20px; left: 20px; background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; text-decoration: none; border-radius: 30px; z-index: 1000; font-size: 14px; }
+
+        /* CLASSES COMMUNES */
+        .zone { display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; box-sizing: border-box; border: 0.5px solid rgba(0,0,0,0.1); }
+
+        /* --- PAGES 1 & 2 --- */
+        .layout-1-2 { display: grid; grid-template-columns: 200px 1fr 200px; grid-template-rows: 80px 1fr; height: 100vh; }
+        .h-haut { grid-column: 1 / 4; background: #ff5e5e; color: white; }
+        .h-gauche { background: #5e8eff; color: white; }
+        .h-milieu { background: #5ecf82; color: white; }
+        .h-droite-vert { background: #5ecf82; color: white; }
+        .h-droite-marron { background: #a37648; color: white; }
+
+        /* --- PAGE 3 --- */
+        .layout-3 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 100px; height: 100vh; }
+        .p3-gauche { background: #3ca095; color: white; }
+        .p3-droite { background: #a043a0; color: white; }
+        .p3-bas { grid-column: 1 / 3; background: #f2c200; color: white; }
+
+        /* --- PAGE 4 & 5 --- */
+        .layout-4-5 { display: flex; flex-direction: column; height: 100vh; background: white; }
+        .c-haut { background: #3ca095; height: 60px; color: white; }
+        .c-menu { background: #a043a0; height: 35px; color: white; }
+        .c-milieu { flex-grow: 1; background: #f2c200; margin: 20px; border: 2px solid #ccc; color: white; }
+        .c-bas { background: #3ca095; height: 60px; color: white; }
+        .grid-abcd { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 100%; }
+        .z-a { background: #3ca095; } .z-b { background: #d99a16; } .z-c { background: #b3b7db; } .z-d { background: #0000ff; color: white;}
+
+        /* --- PAGE 6 (PZ) --- */
+        .layout-6 { display: flex; flex-direction: column; height: 100vh; }
+        .pz-haut { background: #800080; height: 60px; color: white; }
+        .pz-menu { background: #0000ff; height: 30px; color: white; padding-left: 20px; align-items: center; }
+        .pz-grid-wrapper { flex-grow: 1; background: pink; padding: 10px; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr); gap: 5px; }
+        .pz-box { display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 1px solid white; }
+        .red { background: #ff0000; } .orange { background: #ffa500; } .green { background: #008000; } .brown { background: #a52a2a; }
+        .pz-bas { background: #cccccc; height: 60px; }
+
+        /* --- NOUVELLE PAGE 7 (TA CAPTURE) --- */
+        .layout-p7-new { display: grid; grid-template-rows: 50px 1fr 40px; height: 100vh; }
+        .p7-new-header { background: #cc0000; color: white; font-size: 12px; }
+        .p7-new-body { display: grid; grid-template-columns: 1fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1fr; }
+        .p7-new-blue { background: #87ceeb; color: black; font-size: 11px; }
+        .p7-new-green { background: #90ee90; color: black; font-size: 11px; border-left: 1px solid #44a044; }
+        .p7-new-footer { background: #f1c40f; color: black; font-size: 12px; }
+
+    </style>
+</head>
+<body>
+
+    <div id="home" class="home-menu">
+        <h1>Navigateur de Maquettes</h1>
+        <div class="grid-links">
+            <a href="#page1" class="card">Page 1 </a>
+            <a href="#page2" class="card">Page 2 </a>
+            <a href="#page3" class="card">Page 3 </a>
+            <a href="#page4" class="card">Page 4 </a>
+            <a href="#page5" class="card">Page 5 </a>
+            <a href="#page6" class="card">Page 6 </a>
+            <a href="#page7" class="card" style="border-bottom-color: #cc0000;">Page 7</a>
+        </div>
+    </div>
+
+    <a href="#" class="back-btn">↩ Retour au menu</a>
+
+    <div id="page1" class="page">
+        <div class="layout-1-2">
+            <div class="zone h-haut">Zone du Haut</div>
+            <div class="zone h-gauche">Zone de Gauche</div>
+            <div class="zone h-milieu">Zone du Milieu</div>
+            <div class="zone h-droite-vert"></div>
+        </div>
+    </div>
+
+    <div id="page2" class="page">
+        <div class="layout-1-2">
+            <div class="zone h-haut">Zone du Haut</div>
+            <div class="zone h-gauche">Zone de Gauche</div>
+            <div class="zone h-milieu">Zone du Milieu</div>
+            <div class="zone h-droite-marron">Zone de Droite</div>
+        </div>
+    </div>
+
+    <div id="page3" class="page">
+        <div class="layout-3">
+            <div class="zone p3-gauche">gauche</div>
+            <div class="zone p3-droite">droite</div>
+            <div class="zone p3-bas">Bas</div>
+        </div>
+    </div>
+
+    <div id="page4" class="page">
+        <div class="layout-4-5">
+            <div class="zone c-haut">Haut</div>
+            <div class="zone c-menu">Menu</div>
+            <div class="zone c-milieu">Milieu</div>
+            <div class="zone c-bas">Bas</div>
+        </div>
+    </div>
+
+    <div id="page5" class="page">
+        <div class="layout-4-5">
+            <div class="zone c-haut">Haut</div>
+            <div class="zone c-menu">Menu</div>
+            <div style="flex-grow: 1; padding: 20px;">
+                <div class="grid-abcd">
+                    <div class="zone z-a">A</div><div class="zone z-b">B</div>
+                    <div class="zone z-c">C</div><div class="zone z-d">D</div>
+                </div>
+            </div>
+            <div class="zone c-bas">Bas</div>
+        </div>
+    </div>
+
+    <div id="page6" class="page">
+        <div class="layout-6">
+            <div class="zone pz-haut">zone du haut</div>
+            <div class="zone pz-menu">menu</div>
+            <div class="pz-grid-wrapper">
+                <div class="pz-box red">PZ1</div><div class="pz-box red">PZ2</div><div class="pz-box orange">PZ5</div><div class="pz-box orange">PZ6</div>
+                <div class="pz-box red">PZ3</div><div class="pz-box red">PZ4</div><div class="pz-box orange">PZ7</div><div class="pz-box orange">PZ8</div>
+                <div class="pz-box green">PZ9</div><div class="pz-box green">PZ10</div><div class="pz-box brown">PZ13</div><div class="pz-box brown">PZ14</div>
+                <div class="pz-box green">PZ11</div><div class="pz-box green">PZ12</div><div class="pz-box brown">PZ15</div><div class="pz-box brown">PZ16</div>
+            </div>
+            <div class="zone pz-bas">Zone du bas</div>
+        </div>
+    </div>
+
+    <div id="page7" class="page">
+        <div class="layout-p7-new">
+            <div class="zone p7-new-header">Zone du Haut</div>
+            <div class="p7-new-body">
+                <div class="zone p7-new-blue">Zone de Gauche</div>
+                <div class="zone p7-new-green">Z1</div>
+                <div class="zone p7-new-green">Z2</div>
+                <div class="zone p7-new-green">Z3</div>
+                <div class="zone p7-new-green">Z4</div>
+                <div class="zone p7-new-green">Z5</div>
+                <div class="zone p7-new-blue">Zone de Droite</div>
+            </div>
+            <div class="zone p7-new-footer">Zone du Bas</div>
+        </div>
+    </div>
+
+</body>
+</html>
